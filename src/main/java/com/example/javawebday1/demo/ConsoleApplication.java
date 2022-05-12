@@ -3,8 +3,11 @@ package com.example.javawebday1.demo;
 import com.example.javawebday1.entity.Customer;
 import com.example.javawebday1.model.ICustomer;
 import com.example.javawebday1.model.InMemoryCustomerModel;
+import com.example.javawebday1.model.MySQLCustomerModel;
 
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,7 +32,7 @@ public class ConsoleApplication {
                     iCustomer = new InMemoryCustomerModel();
                     break;
                 case 2:
-                    iCustomer = new InMemoryCustomerModel();
+                    iCustomer = new MySQLCustomerModel();
                     break;
                 case 3:
                     System.out.println("SO HANDSOME!");
@@ -96,13 +99,13 @@ public class ConsoleApplication {
 
     private static void updateCustomer() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter rollNumber to update: ");
+        System.out.println("Please enter id to update: ");
         int id = scanner.nextInt();
         Customer existingCustomer = iCustomer.findById(id);
         if (existingCustomer == null) {
             System.err.println("404, Customer not found!");
         } else {
-            System.out.println("Please enter full name");
+            System.out.println("Please enter name");
             String name = scanner.nextLine();
             existingCustomer.setName(name);
             if (iCustomer.update(id, existingCustomer) != null) {
@@ -123,11 +126,29 @@ public class ConsoleApplication {
 
     private static void createNewCustomer() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter roll number");
+        System.out.println("Please enter id");
         int id = scanner.nextInt();
-        System.out.println("Please enter full name");
+        scanner.nextLine();
+        System.out.println("Please enter name");
         String name = scanner.nextLine();
-        Customer customer = new Customer(id, name, "019231233", "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg", LocalDateTime.of(2000, 10, 10, 10, 10));
+        System.out.println("Please enter phone");
+        String phone = scanner.nextLine();
+        System.out.println("Please enter image");
+        String image = scanner.nextLine();
+        System.out.println("Please enter date of birth");
+        LocalDateTime dob = LocalDateTime.now();
+        scanner.nextLine();
+        LocalDateTime createdAt = LocalDateTime.now();
+        scanner.nextLine();
+        LocalDateTime updatedAt = LocalDateTime.now();
+        scanner.nextLine();
+        Customer customer = new Customer();
+        customer.setName(name);
+        customer.setPhone(phone);
+        customer.setImage(image);
+        customer.setDateOfBirth(dob);
+        customer.setCreatedAt(createdAt);
+        customer.setUpdatedAt(updatedAt);
         if (iCustomer.save(customer) != null) {
             System.out.println("Create Customer success!");
         } else {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryCustomerModel implements ICustomer {
+
     private static List<Customer> Customers;
 
     public InMemoryCustomerModel() {

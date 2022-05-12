@@ -9,24 +9,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLCustomerModel implements ICustomer{
+public class MySQLCustomerModel implements ICustomer {
 
     @Override
     public Customer save(Customer customer) {
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "insert into customer " +
+            String sqlQuery = "insert into customers " +
                     "(id, name, phone, image, dateOfBirth, createdAt, updatedAt, status) " +
                     "values " +
-                    "(?, ?, ?, ?, ?, ?, ?, ?)";
+                    "(?, ?, ?, ?, ?, ?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, customer.getId());
             preparedStatement.setString(2, customer.getName());
-            preparedStatement.setString(4, customer.getPhone());
-            preparedStatement.setString(3, customer.getImage());
+            preparedStatement.setString(3, customer.getPhone());
+            preparedStatement.setString(4, customer.getImage());
             preparedStatement.setString(5, customer.getDateOfBirth().toString());
             preparedStatement.setString(6, customer.getCreatedAt().toString());
             preparedStatement.setString(7, customer.getUpdatedAt().toString());
@@ -50,7 +51,7 @@ public class MySQLCustomerModel implements ICustomer{
             preparedStatement.setInt(1, 1);
             System.out.println("Connection success!");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 int id = (resultSet.getInt("id"));
                 String name = resultSet.getString("name");
                 String phone = resultSet.getString("phone");
@@ -81,7 +82,7 @@ public class MySQLCustomerModel implements ICustomer{
             preparedStatement.setInt(1, 1);
             preparedStatement.setInt(2, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 String name = resultSet.getString("name");
                 String phone = resultSet.getString("phone");
                 String avatar = resultSet.getString("image");
