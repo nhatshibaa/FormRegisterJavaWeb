@@ -7,20 +7,25 @@
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>com.example.javawebday1.controller.HomeServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>com.example.javawebday1.controller.RegisterServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddPhoneServlet</servlet-name>
+        <servlet-class>com.example.javawebday1.controller.AddPhoneServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <servlet-name>AddPhoneServlet</servlet-name>
+        <url-pattern>/phone/add</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ListPhoneServlet</servlet-name>
+        <servlet-class>com.example.javawebday1.controller.ListPhoneServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/registerSuccess</url-pattern>
+        <servlet-name>ListPhoneServlet</servlet-name>
+        <url-pattern>/phone/list</url-pattern>
     </servlet-mapping>
 </web-app>
